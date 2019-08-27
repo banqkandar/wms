@@ -14,7 +14,6 @@
                     break;
             }
         } else {
-
             //pagging
             $limit = 8;
             $pg = @$_GET['pg'];
@@ -126,7 +125,7 @@
                                 }
                             } else {
                                 echo '<div class="col m12">
-                                        <div class="card blue lighten-5">
+                                        <div class="card purple lighten-5">
                                             <div class="card-content notif">
                                                 <span class="card-title lampiran"><center>Tidak ada file lampiran surat masuk yang ditemukan</center></span>
                                             </div>

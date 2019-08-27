@@ -1,18 +1,15 @@
 <?php
-    //cek session
     if(empty($_SESSION['admin'])){
         $_SESSION['err'] = '<center>Anda harus login terlebih dahulu!</center>';
         header("Location: ./");
         die();
     } else {
-
         if($_SESSION['admin'] != 1 AND $_SESSION['admin'] != 3){
             echo '<script language="javascript">
                     window.alert("ERROR! Anda tidak memiliki hak akses untuk membuka halaman ini");
                     window.location.href="./logout.php";
                   </script>';
         } else {
-
             if(isset($_REQUEST['act'])){
                 $act = $_REQUEST['act'];
                 switch ($act) {
@@ -33,10 +30,8 @@
                         break;
                 }
             } else {
-
                 $query = mysqli_query($config, "SELECT surat_masuk FROM tbl_sett");
                 list($surat_masuk) = mysqli_fetch_array($query);
-
                 //pagging
                 $limit = $surat_masuk;
                 $pg = @$_GET['pg'];
@@ -47,41 +42,35 @@
                     $curr = ($pg - 1) * $limit;
                 }?>
 
-<!-- Row Start -->
 <div class="row">
-  <!-- Secondary Nav START -->
-  <div class="col s12">
-    <div class="z-depth-1">
-      <nav class="secondary-nav">
-        <div class="nav-wrapper deep-purple darken-1">
-          <div class="col m9">
-            <ul class="left">
-              <li class="waves-effect waves-light">
-                <a href="?page=tsm">Surat Masuk</a></li>
-              <li class="waves-effect waves-light">
-                <a href="?page=tsm&act=add"><i class="material-icons md-24">add_circle</i> Tambah
-                  Data</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col m3 hide-on-med-and-down">
-            <form method="post" action="?page=tsm">
-              <div class="input-field round-in-box">
-                <input id="search" type="search" name="cari" placeholder="Pencarian"
-                  required>
-                <label for="search"><i class="material-icons md-dark">search</i></label>
-                <input type="submit" name="submit" class="hidden">
-              </div>
-            </form>
-          </div>
+    <div class="col s12">
+        <div class="z-depth-1">
+            <nav class="secondary-nav">
+                <div class="nav-wrapper deep-purple darken-1">
+                    <div class="col m9">
+                        <ul class="left">
+                            <li class="waves-effect waves-light">
+                                <a href="?page=tsm">Surat Masuk</a></li>
+                            <li class="waves-effect waves-light">
+                                <a href="?page=tsm&act=add"><i class="material-icons md-24">add</i> Tambah
+                                    Surat</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col m3 hide-on-med-and-down">
+                        <form method="post" action="?page=tsm">
+                            <div class="input-field round-in-box">
+                                <input id="search" type="search" name="cari" placeholder="Pencarian" required>
+                                <label for="search"><i class="material-icons md-dark">search</i></label>
+                                <input type="submit" name="submit" class="hidden">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
         </div>
-      </nav>
     </div>
-  </div>
-  <!-- Secondary Nav END -->
 </div>
-<!-- Row END -->
-
 <?php
     if(isset($_SESSION['succAdd'])){
         $succAdd = $_SESSION['succAdd'];
@@ -124,10 +113,10 @@
     }
 ?>
 
-<!-- Row form Start -->
-<div class="row jarak-form">
+            <!-- Row form Start -->
+            <div class="row jarak-form">
 
-  <?php
+                <?php
                     if(isset($_REQUEST['submit'])){
                     $cari = mysqli_real_escape_string($config, $_REQUEST['cari']);
                         echo '

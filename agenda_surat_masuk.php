@@ -129,7 +129,7 @@
 
                             echo '<h5 class="nama" id="nama">'.$nama.'</h5><br/>';
 
-                            echo '<h6 class="status">'.$status.'</h6>';
+                            echo '<h6 class="status">Akreditasi '.$status.'</h6>';
 
                             echo '<span id="alamat">'.$alamat.'</span>
 
@@ -149,7 +149,6 @@
                                 <tr>
                                     <th width="3%">No Agenda</th>
                                     <th width="5%">Kode</th>
-                                    <th width="21%">Isi Ringkas</th>
                                     <th width="18%">Asal Surat</th>
                                     <th width="15%">Nomor Surat</th>
                                     <th width="8%">Tanggal<br/> Surat</th>
@@ -169,7 +168,6 @@
                                  <tr>
                                         <td>'.$row['no_agenda'].'</td>
                                         <td>'.$row['kode'].'</td>
-                                        <td>'.$row['isi'].'</td>
                                         <td>'.$row['asal_surat'].'</td>
                                         <td>'.$row['no_surat'].'</td>
                                         <td>'.indoDate($row['tgl_surat']).'</td>

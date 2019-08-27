@@ -139,10 +139,7 @@
 
             }
         </style>
-
         <body onload="window.print()">
-
-        <!-- Container START -->
             <div id="colres">
                 <div class="disp">';
                     $query2 = mysqli_query($config, "SELECT institusi, nama, status, alamat, logo FROM tbl_instansi");
@@ -151,7 +148,7 @@
                         echo '<h6 class="up">'.$institusi.'</h6>';
                         echo '<h5 class="up" id="nama">'.$nama.'</h5><br/>';
                         echo '<h6 class="status">Akreditasi '.$status.'</h6>';
-                        echo '<span id="alamat">Jalan Raya Kediri Gg. Kwagean No. 04 Loceret Telp/Fax. (0358) 329806 Nganjuk 64471</span>';
+                        echo '<span id="alamat">'.$alamat.'</span>';
 
                     echo '
                 </div>
@@ -169,33 +166,28 @@
                         <tbody>
                             <tr>
                                 <td id="right"><strong>Nomor Surat</strong></td>
-                                <td id="left"  width="40%">: '.$row['no_surat'].'</td>
+                                <td id="left" width="40%">: '.$row['no_surat'].'</td>
                                 <td id="left"> '.$row['asal_surat'].',</td>
                                 <td id="left"> '.indoDate($row['tgl_surat']).'</td>
                             </tr>
                             <tr>
                                 <td id="right" width="18%"><strong>Indeks Berkas</strong></td>
                                 <td id="left" colspan="3">: '.$row['indeks'].'</td>
-                                
                             </tr>
-                                <td id="left" colspan="4"><strong>Kode</strong> : '.$row['kode'].'</td>
+                            <tr>
+                                <td id="right" width="18%"><strong>No. Agenda/Kode</strong></td>
+                                <td id="left" colspan="4">: '.$row['no_agenda'].' / '.$row['kode'].'</td>
                             </tr>
                             <tr>
                                 <td id="right"><strong>Isi Ringkas</strong></td>
                                 <td id="left" colspan="3">: '.$row['isi'].'</td>
                             </tr>
                             <tr>
-                                <td id="right"><strong>Diterima Tanggal</strong></td>      
-                                <td id="left">: '.indoDate($row['tgl_diterima']).'</td>
-                                <td id="left" colspan="4"><strong>No. Agenda</strong> : '.$row['no_agenda'].'</td>
-                            </tr>
-                            <tr>
-                                <td id="right"><strong>Tanggal Penyelesaian</strong></td>
-                                <td id="left" colspan="4">: </td>
+                                <td id="right" width="18%"><strong>Diterima Tanggal</strong></td>
+                                <td id="left" colspan="3">: '.indoDate($row['tgl_diterima']).'</td>
                             </tr>
                             <tr>';
                             $query3 = mysqli_query($config, "SELECT * FROM tbl_disposisi JOIN tbl_surat_masuk ON tbl_disposisi.id_surat = tbl_surat_masuk.id_surat WHERE tbl_disposisi.id_surat='$id_surat'");
-
                             if(mysqli_num_rows($query3) > 0){
                                 $no = 0;
                                 $row = mysqli_fetch_array($query3);{
@@ -206,10 +198,12 @@
                                     <div style="height: 50px;"></div>
                                     <strong>Batas Waktu</strong> : '.indoDate($row['batas_waktu']).'<br/>
                                     <strong>Sifat</strong> : '.$row['sifat'].'<br/>
-                                    <strong>Catatan</strong> :<br/> '.$row['catatan'].'
+                                    <strong>Catatan</strong> : '.$row['keterangan'].'
                                     <div style="height: 25px;"></div>
                                 </td>
-                                <td><strong>Diteruskan Kepada</strong> : <br/>'.$row['tujuan'].'</td>
+                                <td colspan="2">
+                                    <strong>Diteruskan Kepada</strong> : <br/>'.$row['tujuan'].'
+                                </td>
                             </tr>';
                                 }
                             } else {
@@ -242,7 +236,6 @@
             </div>
         </div>
         <div class="jarak2"></div>
-    <!-- Container END -->
 
     </body>';
     }
