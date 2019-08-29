@@ -9,6 +9,7 @@
         echo '
         <style type="text/css">
             table {
+                border: none;
                 background: #fff;
                 padding: 5px;
             }
@@ -33,9 +34,10 @@
                 margin: 0 0 0 1rem;
             }
             #lead {
+                margin-top: 100px;
                 width: auto;
                 position: relative;
-                margin: 25px 0 0 75%;
+                float:right;
             }
             .lead {
                 font-weight: bold;
@@ -67,6 +69,25 @@
                 font-size: 20px;
                 font-weight: bold;
             }
+            .aw {
+                display: inline-block;
+                width:50%
+                margin-bottom: 4px;
+            }
+            .ay {
+                display: inline-block;
+                margin-bottom: 4px;
+            }
+            .nosurat{
+                float:right;
+            }
+            .isiringkas {
+                margin-bottom: 15px;
+                text-align: justify;
+            }
+            .isidisposisi {
+                text-align: justify;
+            }
             @media print{
                 body {
                     font-size: 12px;
@@ -76,9 +97,9 @@
                     display: none;
                 }
                 table {
+                    border: 0px !important;
                     width: 100%;
                     font-size: 12px;
-                    color: #212121;
                 }
                 tr,td {
                     vertical-align: top!important;
@@ -104,9 +125,10 @@
                     margin: .5rem 0 0 .5rem;
                 }
                 #lead {
+                    margin-top: 100px;
                     width: auto;
                     position: relative;
-                    margin: 15px 0 0 75%;
+                    float:right;
                 }
                 .lead {
                     font-weight: bold;
@@ -137,6 +159,25 @@
                     margin: -1rem 0 1rem;
                 }
 
+                .aw {
+                    display: inline-block;
+                    width:50%
+                    margin-bottom: 4px;
+                }
+                .ay {
+                    display: inline-block;
+                    margin-bottom: 4px;
+                }
+                .nosurat{
+                    float:right;
+                }
+                .isiringkas {
+                    margin-bottom: 15px;
+                    text-align: justify;
+                }
+                .isidisposisi {
+                    text-align: justify;
+                }
             }
         </style>
         <body onload="window.print()">
@@ -152,8 +193,8 @@
 
                     echo '
                 </div>
-                <div class="separator"></div>';
-
+                <hr class="separator">
+                ';
                 $id_surat = mysqli_real_escape_string($config, $_REQUEST['id_surat']);
                 $query = mysqli_query($config, "SELECT * FROM tbl_surat_masuk WHERE id_surat='$id_surat'");
 
@@ -162,57 +203,45 @@
                 while($row = mysqli_fetch_array($query)){
 
                 echo '
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td id="right"><strong>Nomor Surat</strong></td>
-                                <td id="left" width="40%">: '.$row['no_surat'].'</td>
-                                <td id="left"> '.$row['asal_surat'].',</td>
-                                <td id="left"> '.indoDate($row['tgl_surat']).'</td>
-                            </tr>
-                            <tr>
-                                <td id="right" width="18%"><strong>Indeks Berkas</strong></td>
-                                <td id="left" colspan="3">: '.$row['indeks'].'</td>
-                            </tr>
-                            <tr>
-                                <td id="right" width="18%"><strong>No. Agenda/Kode</strong></td>
-                                <td id="left" colspan="4">: '.$row['no_agenda'].' / '.$row['kode'].'</td>
-                            </tr>
-                            <tr>
-                                <td id="right"><strong>Isi Ringkas</strong></td>
-                                <td id="left" colspan="3">: '.$row['isi'].'</td>
-                            </tr>
-                            <tr>
-                                <td id="right" width="18%"><strong>Diterima Tanggal</strong></td>
-                                <td id="left" colspan="3">: '.indoDate($row['tgl_diterima']).'</td>
-                            </tr>
-                            <tr>';
-                            $query3 = mysqli_query($config, "SELECT * FROM tbl_disposisi JOIN tbl_surat_masuk ON tbl_disposisi.id_surat = tbl_surat_masuk.id_surat WHERE tbl_disposisi.id_surat='$id_surat'");
+                <div class="aw">
+                    <p><strong >Nomor Surat</strong> : '.$row['no_surat'].'</p>
+                </div>
+                <div class="aw  nosurat">
+                    <p> '.$row['asal_surat'].', '.indoDate($row['tgl_surat']).'</p>
+                </div>
+                <div class="a ">
+                    <strong>Indeks Berkas</strong> : '.$row['indeks'].'
+                </div>
+                <div class="a ">
+                    <strong>No. Agenda/Kode</strong> : '.$row['no_agenda'].' / '.$row['kode'].'
+                    
+                </div>
+                <div class="isiringkas">
+                    <strong>Isi Ringkas</strong> : '.$row['isi'].' 
+                </div>
+                <div class="aw">
+                    <strong>Diterima Tanggal</strong> : '.indoDate($row['tgl_diterima']).'<br>
+                </div>';
+                $query3 = mysqli_query($config, "SELECT * FROM tbl_disposisi JOIN tbl_surat_masuk ON tbl_disposisi.id_surat = tbl_surat_masuk.id_surat WHERE tbl_disposisi.id_surat='$id_surat'");
                             if(mysqli_num_rows($query3) > 0){
                                 $no = 0;
                                 $row = mysqli_fetch_array($query3);{
-                                echo '
-                            <tr class="isi">
-                                <td colspan="2">
-                                    <strong>Isi Disposisi :</strong><br/>'.$row['isi_disposisi'].'
-                                    <div style="height: 50px;"></div>
-                                    <strong>Batas Waktu</strong> : '.indoDate($row['batas_waktu']).'<br/>
-                                    <strong>Sifat</strong> : '.$row['sifat'].'<br/>
-                                    <strong>Catatan</strong> : '.$row['keterangan'].'
-                                    <div style="height: 25px;"></div>
-                                </td>
-                                <td colspan="2">
-                                    <strong>Diteruskan Kepada</strong> : <br/>'.$row['tujuan'].'
-                                </td>
-                            </tr>';
+                echo'
+                <div class="ay isidisposisi">
+                    <strong>Isi Disposisi</strong> : '.$row['isi_disposisi'].'
+                </div>
+                <div class="ay">
+                    <strong>Diteruskan Kepada</strong> : <br/>'.$row['tujuan'].'
+                </div>';
                                 }
                             } else {
                                 echo '
-                                <tr class="isi">
-                                    <td colspan="3"><strong>Isi Disposisi :</strong>
-                                    </td>
-                                    <td><strong>Diteruskan Kepada</strong> : </td>
-                                </tr>';
+                                <div class="ay isidisposisi">
+                                    <strong>Isi Disposisi</strong> :
+                                </div>
+                                <div class="ay">
+                                    <strong>Diteruskan Kepada</strong> :
+                                </div>';
                             }
                         } echo '
                 </tbody>
@@ -225,7 +254,7 @@
                 if(!empty($kepsek)){
                     echo '<p class="lead">'.$kepsek.'</p>';
                 } else {
-                    echo '<p class="lead">H. Riza Fachri, S.Kom.</p>';
+                    echo '<p class="lead">Moh. Iskandar S.Kom.</p>';
                 }
                 if(!empty($nip)){
                     echo '<p>NIP. '.$nip.'</p>';
