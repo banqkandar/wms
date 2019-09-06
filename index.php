@@ -73,7 +73,7 @@
 
     #smk {
         font-size: 1rem;
-        margin-bottom: 10px;
+        margin-bottom: 3px;
     }
 
     .batas {
@@ -168,11 +168,14 @@
                         ?>
                         <div class="col s12">
                             <div class="card-content">
-                                <h5 class="center" id="title">Aplikasi Manajemen Surat</h5>
+                                <h5 class="center" id="title">Web Manajemen Surat</h5>
                                 <?= '<img id="logo" src="upload/' . $data['logo'] . '">'; ?>
                                 <h4 class="center" id="smk">
-                                    <?= '' . $data['nama'] . ''; ?>
+                                    <?= '' . $data['institusi'] . ''; ?>
                                 </h4>
+                                <h5 class="center" id="smk">
+                                    <?= '' . $data['nama'] . ''; ?>
+                                </h5>
                                 <div class="batas"></div>
                             </div>
                         </div>

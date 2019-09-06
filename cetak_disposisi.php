@@ -29,8 +29,8 @@
             .logodisp {
                 float: left;
                 position: relative;
-                width: 110px;
-                height: 110px;
+                width: 90px;
+                height: 90px;
                 margin: 0 0 0 1rem;
             }
             #lead {
@@ -74,9 +74,9 @@
                 width:50%
                 margin-bottom: 4px;
             }
-            .ay {
-                display: inline-block;
-                margin-bottom: 4px;
+            .ar {
+                width:50%;
+                margin-bottom: 8px;
             }
             .nosurat{
                 float:right;
@@ -85,8 +85,8 @@
                 margin-bottom: 15px;
                 text-align: justify;
             }
-            .isidisposisi {
-                text-align: justify;
+            .isi {
+                margin-top: 50px;
             }
             @media print{
                 body {
@@ -120,8 +120,8 @@
                 .logodisp {
                     float: left;
                     position: relative;
-                    width: 80px;
-                    height: 80px;
+                    width: 60px;
+                    height: 60px;
                     margin: .5rem 0 0 .5rem;
                 }
                 #lead {
@@ -137,7 +137,6 @@
                 }
                 #nama {
                     font-size: 20px!important;
-                    font-weight: bold;
                     text-transform: uppercase;
                     margin: -10px 0 -20px 0;
                 }
@@ -161,12 +160,11 @@
 
                 .aw {
                     display: inline-block;
-                    width:50%
                     margin-bottom: 4px;
                 }
-                .ay {
-                    display: inline-block;
-                    margin-bottom: 4px;
+                .ar {
+                    width:50%;
+                    margin-bottom: 8px;
                 }
                 .nosurat{
                     float:right;
@@ -175,20 +173,16 @@
                     margin-bottom: 15px;
                     text-align: justify;
                 }
-                .isidisposisi {
-                    text-align: justify;
-                }
             }
         </style>
         <body onload="window.print()">
             <div id="colres">
                 <div class="disp">';
-                    $query2 = mysqli_query($config, "SELECT institusi, nama, status, alamat, logo FROM tbl_instansi");
-                    list($institusi, $nama, $status, $alamat, $logo) = mysqli_fetch_array($query2);
+                    $query2 = mysqli_query($config, "SELECT institusi, nama, alamat, logo FROM tbl_instansi");
+                    list($institusi, $nama, $alamat, $logo) = mysqli_fetch_array($query2);
                         echo '<img class="logodisp" src="./upload/'.$logo.'"/>';
                         echo '<h6 class="up">'.$institusi.'</h6>';
                         echo '<h5 class="up" id="nama">'.$nama.'</h5><br/>';
-                        echo '<h6 class="status">Akreditasi '.$status.'</h6>';
                         echo '<span id="alamat">'.$alamat.'</span>';
 
                     echo '
@@ -204,50 +198,55 @@
 
                 echo '
                 <div class="aw">
-                    <p><strong >Nomor Surat</strong> : '.$row['no_surat'].'</p>
+                    <p><strong >Nomor</strong> : '.$row['no_surat'].'</p>
                 </div>
                 <div class="aw  nosurat">
                     <p> '.$row['asal_surat'].', '.indoDate($row['tgl_surat']).'</p>
                 </div>
-                <div class="a ">
-                    <strong>Indeks Berkas</strong> : '.$row['indeks'].'
+                <div class="ar ">
+                    <strong>Lampiran</strong> : '.$row['keterangan'].'
                 </div>
-                <div class="a ">
-                    <strong>No. Agenda/Kode</strong> : '.$row['no_agenda'].' / '.$row['kode'].'
-                    
+                <div class="ar ">
+                    <strong>Kode Klasifikasi</strong> : '.$row['kode'].'                    
                 </div>
                 <div class="isiringkas">
-                    <strong>Isi Ringkas</strong> : '.$row['isi'].' 
+                    <strong>Perihal</strong> : '.$row['isi'].' 
                 </div>
-                <div class="aw">
-                    <strong>Diterima Tanggal</strong> : '.indoDate($row['tgl_diterima']).'<br>
+                <div>
+                    Surat dari '.$row['keterangan'].', '.indoDate($row['tgl_diterima']).' tentang Permohonan Kerja Praktek.
                 </div>';
                 $query3 = mysqli_query($config, "SELECT * FROM tbl_disposisi JOIN tbl_surat_masuk ON tbl_disposisi.id_surat = tbl_surat_masuk.id_surat WHERE tbl_disposisi.id_surat='$id_surat'");
                             if(mysqli_num_rows($query3) > 0){
                                 $no = 0;
                                 $row = mysqli_fetch_array($query3);{
                 echo'
-                <div class="ay isidisposisi">
-                    <strong>Isi Disposisi</strong> : '.$row['isi_disposisi'].'
+                <div>
+                <p>Sehubungan dengan hal ini tersebut diatas, kami laporkan kepada '.$row['tujuan'].' bahwa Mahasiswa Bapak/Ibu atas nama: </p>
                 </div>
-                <div class="ay">
-                    <strong>Diteruskan Kepada</strong> : <br/>'.$row['tujuan'].'
+                <div>
+                <p>'.$row['isi_disposisi'].' </p>
+                </div>
+                <div>
+                <p>'.$row['catatan'].' </p>
                 </div>';
                                 }
                             } else {
                                 echo '
-                                <div class="ay isidisposisi">
-                                    <strong>Isi Disposisi</strong> :
+                                <div>
+                                    <p> - </p> 
                                 </div>
-                                <div class="ay">
-                                    <strong>Diteruskan Kepada</strong> :
+                                <div>
+                                    <p> -  </p>
+                                </div>
+                                <div>
+                                    <p> -  </p>
                                 </div>';
                             }
                         } echo '
                 </tbody>
             </table>
             <div id="lead">
-                <p>Kepala Bagian</p>
+                <p>KASI TIK POLRI BANDUNG</p>
                 <div style="height: 50px;"></div>';
                 $query = mysqli_query($config, "SELECT kepsek, nip FROM tbl_instansi");
                 list($kepsek,$nip) = mysqli_fetch_array($query);
@@ -257,9 +256,9 @@
                     echo '<p class="lead">Moh. Iskandar S.Kom.</p>';
                 }
                 if(!empty($nip)){
-                    echo '<p>NIP. '.$nip.'</p>';
+                    echo '<p>KOMPOL NRP. '.$nip.'</p>';
                 } else {
-                    echo '<p>NIP. -</p>';
+                    echo '<p>KOMPOL NRP. -</p>';
                 }
                 echo '
             </div>

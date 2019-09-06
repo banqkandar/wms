@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 21, 2018 at 08:59 AM
--- Server version: 10.3.11-MariaDB-1:10.3.11+maria~xenial-log
--- PHP Version: 7.2.12-1+ubuntu16.04.1+deb.sury.org+1
+-- Host: 127.0.0.1
+-- Generation Time: Sep 04, 2019 at 04:28 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -39,6 +39,13 @@ CREATE TABLE `tbl_disposisi` (
   `id_user` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tbl_disposisi`
+--
+
+INSERT INTO `tbl_disposisi` (`id_disposisi`, `tujuan`, `isi_disposisi`, `sifat`, `batas_waktu`, `catatan`, `id_surat`, `id_user`) VALUES
+(2, 'Kampus UNIKOM', 'Dalam prosedur pengurusan surat masuk, ada salah satu tahapan yang dilakukan oleh pencatat surat atau agendaris, yang memanfaatkan lembar disposisi. Penggunaan lembar disposisi ini dilakukan ketika proses menyampaikan surat. Dalam penyampaian surat, maka hendaknya disertai dengan lembar disposisi kepada pengarah surat.', 'Penting', '2019-08-31', 'Dear Rektor UNIKOM', 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -64,7 +71,7 @@ CREATE TABLE `tbl_instansi` (
 --
 
 INSERT INTO `tbl_instansi` (`id_instansi`, `institusi`, `nama`, `status`, `alamat`, `kepsek`, `nip`, `website`, `email`, `logo`, `id_user`) VALUES
-(1, 'Dinas Pendidikan Pemuda Dan Olahraga', 'SMK MasRud.com', 'Terakreditasi A', 'Sawahan, Nganjuk, Jawa Timur', 'M. Rudianto', '-', 'https://masrud.com', 'rudi@masrud.com', 'logo.png', 1);
+(1, 'KANTOR KEPOLISIAN POLRESTABES BANDUNG', 'SiTiPol TIK Polrestabes Bandung', 'A', 'Jl. Merdeka No.18-21, Kec. Sumur Bandung, Kota Bandung, Jawa Barat 40117', 'Cecep Erlangga', '908192739127', 'http://polrestabes-bandung.or.id/', 'humas@polrestabes-bandung.or.id', 'logo-sitipol.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -79,6 +86,14 @@ CREATE TABLE `tbl_klasifikasi` (
   `uraian` mediumtext NOT NULL,
   `id_user` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_klasifikasi`
+--
+
+INSERT INTO `tbl_klasifikasi` (`id_klasifikasi`, `kode`, `nama`, `uraian`, `id_user`) VALUES
+(1, 'VOC1G1AIYISQV', 'mohammad iskandar', 'dsfdsdf', 1),
+(2, 'sdf', 'sdf', 'dsfsdf\r\nsdfsdf\r\nsdf\r\n', 1);
 
 -- --------------------------------------------------------
 
@@ -121,6 +136,13 @@ CREATE TABLE `tbl_surat_keluar` (
   `id_user` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tbl_surat_keluar`
+--
+
+INSERT INTO `tbl_surat_keluar` (`id_surat`, `no_agenda`, `tujuan`, `no_surat`, `isi`, `kode`, `tgl_surat`, `tgl_catat`, `file`, `keterangan`, `id_user`) VALUES
+(1, 1, 'Kampus UNIKOM', 'A91', 'Bagian-bagian surat resmi berikutnya adalah bagian hal atau perihal. Fungsi bagian hal dalam surat adalah memberi petunjuk pada pembaca tentang kepentingan dan isi pokok dalam surat tersebut. Singkatnya, hal atau perihal hampir sama dengan judul pada surat berjudul.', '5646', '2019-08-29', '2019-08-27', '8799-030208-098107-Windarto-MHaekal.pdf', 'tidak ada keterangan', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -142,6 +164,14 @@ CREATE TABLE `tbl_surat_masuk` (
   `id_user` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tbl_surat_masuk`
+--
+
+INSERT INTO `tbl_surat_masuk` (`id_surat`, `no_agenda`, `no_surat`, `asal_surat`, `isi`, `kode`, `indeks`, `tgl_surat`, `tgl_diterima`, `file`, `keterangan`, `id_user`) VALUES
+(2, 1, '120/RTMK/2208/WERWER/2019', 'Sekolah SMKN 1 Bandung', 'Pada beberapa surat juga terdapat lampiran yang disertakan. Bagian lampiran merupakan penjelas yang memberi informasi bahwa ada berkas atau dokumen lain yang disertakan dalam surat tersebut. Jika misal tidak terdapat berkas atau dokumen yang dilampirkan, maka bagian lampiran ditiadakan.', '3632', 'A24', '2019-08-27', '2019-08-27', '4584-CKEditor4.PFW.Sample.Recognition_of_Achievement.docx', 'tidak ada keterangan', 1),
+(3, 2, 'DEH/2287/IOOI/2019', 'Kampus UNIKOM', 'Penulisan lampiran yang disertakan bisa disebutkan jumlah lembar, eksemplar atau cukup jumlah berkasnya dengan bentuk huruf. Jika lebih dari sepuluh maka ditulis dalam bentuk angka. Sedangkan jika tidak ada lampiran bisa ditulis tanda penghubung atau tanda minus.', '9999', 'A78', '2019-09-10', '2019-08-27', '9646-skck.doc', 'tidak ada keterangan', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -162,7 +192,8 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `nama`, `nip`, `admin`) VALUES
-(1, 'masrud', '7d05dc02abe9cda729d0c798c886db47', 'M. Rudianto', '-', 1);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin Ganteng', '10116121', 1),
+(2, 'bambang', 'a9711cbb2e3c2d5fc97a63e45bbe5076', 'bambang', '10203012983', 3);
 
 --
 -- Indexes for dumped tables
@@ -218,7 +249,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_disposisi`
 --
 ALTER TABLE `tbl_disposisi`
-  MODIFY `id_disposisi` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_disposisi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_klasifikasi`
@@ -236,13 +267,13 @@ ALTER TABLE `tbl_surat_keluar`
 -- AUTO_INCREMENT for table `tbl_surat_masuk`
 --
 ALTER TABLE `tbl_surat_masuk`
-  MODIFY `id_surat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_surat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_user` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -121,15 +121,13 @@
 
                     <div class="row agenda">
                     <div class="disp hidd">';
-                        $query2 = mysqli_query($config, "SELECT institusi, nama, status, alamat, logo FROM tbl_instansi");
-                        list($institusi, $nama, $status, $alamat, $logo) = mysqli_fetch_array($query2);
+                        $query2 = mysqli_query($config, "SELECT institusi, nama, alamat, logo FROM tbl_instansi");
+                        list($institusi, $nama, $alamat, $logo) = mysqli_fetch_array($query2);
                             echo '<img class="logodisp" src="./upload/'.$logo.'"/>';
 
                             echo '<h6 class="up">'.$institusi.'</h6>';
 
                             echo '<h5 class="nama" id="nama">'.$nama.'</h5><br/>';
-
-                            echo '<h6 class="status">Akreditasi '.$status.'</h6>';
 
                             echo '<span id="alamat">'.$alamat.'</span>
 
@@ -152,21 +150,21 @@
                                     <th width="18%">Asal Surat</th>
                                     <th width="15%">Nomor Surat</th>
                                     <th width="8%">Tanggal<br/> Surat</th>
-                                    <th width="8%">Tanggal Diterima</th>
                                     <th width="10%">Penerima</th>
+                                    <th width="8%">Tanggal Diterima</th>
                                     <th width="10%">Paraf</th>
-                                    <th width="10%">Keterangan</th>
+                                    <th width="10%">Dari Pihak</th>
                                 </tr>
                             </thead>
 
                             <tbody>';
 
                             if(mysqli_num_rows($query) > 0){
-                                $no = 0;
+                                $no = 1;
                                 while($row = mysqli_fetch_array($query)){
                                  echo '
                                  <tr>
-                                        <td>'.$row['no_agenda'].'</td>
+                                        <td>'.$no++ .'</td>
                                         <td>'.$row['kode'].'</td>
                                         <td>'.$row['asal_surat'].'</td>
                                         <td>'.$row['no_surat'].'</td>

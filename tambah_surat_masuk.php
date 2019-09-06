@@ -43,7 +43,7 @@
                     } else {
 
                         if(!preg_match("/^[a-zA-Z0-9.,_()%&@\/\r\n -]*$/", $isi)){
-                            $_SESSION['isi'] = 'Form Isi Ringkas hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), garis miring(/), kurung(), underscore(_), dan(&) persen(%) dan at(@)';
+                            $_SESSION['isi'] = 'Form Perihal hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), garis miring(/), kurung(), underscore(_), dan(&) persen(%) dan at(@)';
                             echo '<script language="javascript">window.history.back();</script>';
                         } else {
 
@@ -63,7 +63,7 @@
                                     } else {
 
                                         if(!preg_match("/^[a-zA-Z0-9.,()\/ -]*$/", $keterangan)){
-                                            $_SESSION['keterangan'] = 'Form Keterangan hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), garis miring(/), dan kurung()';
+                                            $_SESSION['keterangan'] = 'Form Surat dari hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), garis miring(/), dan kurung()';
                                             echo '<script language="javascript">window.history.back();</script>';
                                         } else {
 
@@ -302,7 +302,7 @@
                         unset($_SESSION['isi']);
                     }
                 ?>
-                <label for="isi">Isi Ringkas</label>
+                <label for="isi">Perihal</label>
             </div>
             <div class="input-field col s6">
                 <i class="material-icons prefix md-prefix">featured_play_list</i>
@@ -314,7 +314,7 @@
                         unset($_SESSION['keterangan']);
                     }
                 ?>
-                <label for="keterangan">Keterangan</label>
+                <label for="keterangan">Surat dari</label>
             </div>
             <div class="input-field col s6">
                 <div class="file-field input-field">

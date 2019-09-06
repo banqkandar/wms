@@ -13,9 +13,15 @@
                             }
 
                             if(!empty($data['nama'])){
-                                echo '<h4 class="ins">'.$data['nama'].'</h4>';
+                                echo '<h5 class="ins">'.$data['institusi'].'</h5>';
                             } else {
-                                echo '<h4 class="ins">Polrestabes Bandung</h4>';
+                                echo '<h5 class="ins">KEPOLISIAN NEGARA REPUBLIK INDONESIA</h5>';
+                            }
+
+                            if(!empty($data['nama'])){
+                                echo '<h5 class="ins">'.$data['nama'].'</h5>';
+                            } else {
+                                echo '<h5 class="ins">RESOR KOTA BESAR BANDUNG</h5>';
                             }
 
                             if(!empty($data['alamat'])){

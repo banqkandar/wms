@@ -31,7 +31,7 @@
                 if(isset($_REQUEST['submit'])){
 
                     //validasi form kosong
-                    if ($_REQUEST['institusi'] == "" || $_REQUEST['nama'] == "" || $_REQUEST['status'] == "" || $_REQUEST['alamat'] == "" || $_REQUEST['kepsek'] == "" || $_REQUEST['nip'] == ""
+                    if ($_REQUEST['institusi'] == "" || $_REQUEST['nama'] == "" || $_REQUEST['alamat'] == "" || $_REQUEST['kepsek'] == "" || $_REQUEST['nip'] == ""
                         || $_REQUEST['website'] == "" || $_REQUEST['email'] == ""){
                         $_SESSION['errEmpty'] = 'ERROR! Semua form wajib diisi';
                         header("Location: ././admin.php?page=sett");
@@ -41,7 +41,6 @@
                         $id_instansi = "1";
                         $institusi = $_REQUEST['institusi'];
                         $nama = $_REQUEST['nama'];
-                        $status = $_REQUEST['status'];
                         $alamat = $_REQUEST['alamat'];
                         $kepsek = $_REQUEST['kepsek'];
                         $nip = $_REQUEST['nip'];
@@ -60,10 +59,10 @@
                                 echo '<script language="javascript">window.history.back();</script>';
                             } else {
 
-                                if(!preg_match("/^[a-zA-Z0-9.,:\/<> -\"]*$/", $status)){
-                                    $_SESSION['status'] = 'Form Status hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), titik dua(:), petik dua(""), garis miring(/) dan minus(-)';
-                                    echo '<script language="javascript">window.history.back();</script>';
-                                } else {
+                                // if(!preg_match("/^[a-zA-Z0-9.,:\/<> -\"]*$/", $status)){
+                                //     $_SESSION['status'] = 'Form Status hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), titik dua(:), petik dua(""), garis miring(/) dan minus(-)';
+                                //     echo '<script language="javascript">window.history.back();</script>';
+                                // } else {
 
                                     if(!preg_match("/^[a-zA-Z0-9.,()\/ -]*$/", $alamat)){
                                         $_SESSION['alamat'] = 'Form Alamat hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), garis miring(/), dan kurung()';
@@ -71,12 +70,12 @@
                                     } else {
 
                                         if(!preg_match("/^[a-zA-Z., ]*$/", $kepsek)){
-                                            $_SESSION['kepsek'] = 'Form Nama Kepala Sekolah hanya boleh mengandung karakter huruf, spasi, titik(.) dan koma(,)<br/><br/>';
+                                            $_SESSION['kepsek'] = 'Form Nama hanya boleh mengandung karakter huruf, spasi, titik(.) dan koma(,)<br/><br/>';
                                             echo '<script language="javascript">window.history.back();</script>';
                                         } else {
 
                                             if(!preg_match("/^[0-9 -]*$/", $nip)){
-                                                $_SESSION['nipkepsek'] = 'Form NIP Kepala Sekolah hanya boleh mengandung karakter angka, spasi, dan minus(-)<br/><br/>';
+                                                $_SESSION['nipkepsek'] = 'Form NIP hanya boleh mengandung karakter angka, spasi, dan minus(-)<br/><br/>';
                                                 echo '<script language="javascript">window.history.back();</script>';
                                             } else {
 
@@ -120,7 +119,7 @@
 
                                                                     move_uploaded_file($_FILES['logo']['tmp_name'], $target_dir.$nlogo);
 
-                                                                    $query = mysqli_query($config, "UPDATE tbl_instansi SET institusi='$institusi',nama='$nama',status='$status',alamat='$alamat',kepsek='$kepsek',nip='$nip',website='$website',email='$email',logo='$nlogo',id_user='$id_user' WHERE id_instansi='$id_instansi'");
+                                                                    $query = mysqli_query($config, "UPDATE tbl_instansi SET institusi='$institusi',nama='$nama',alamat='$alamat',kepsek='$kepsek',nip='$nip',website='$website',email='$email',logo='$nlogo',id_user='$id_user' WHERE id_instansi='$id_instansi'");
 
                                                                     if($query == true){
                                                                         $_SESSION['succEdit'] = 'SUKSES! Data instansi berhasil diupdate';
@@ -141,7 +140,7 @@
                                                         } else {
 
                                                             //jika form logo kosong akan mengeksekusi script dibawah ini
-                                                            $query = mysqli_query($config, "UPDATE tbl_instansi SET institusi='$institusi',nama='$nama',status='$status',alamat='$alamat',kepsek='$kepsek',nip='$nip',website='$website',email='$email',id_user='$id_user' WHERE id_instansi='$id_instansi'");
+                                                            $query = mysqli_query($config, "UPDATE tbl_instansi SET institusi='$institusi',nama='$nama',alamat='$alamat',kepsek='$kepsek',nip='$nip',website='$website',email='$email',id_user='$id_user' WHERE id_instansi='$id_instansi'");
 
                                                             if($query == true){
                                                                 $_SESSION['succEdit'] = 'SUKSES! Data instansi berhasil diupdate';
@@ -160,7 +159,6 @@
                                 }
                             }
                         }
-                    }
                 } else {
 
                     $query = mysqli_query($config, "SELECT * FROM tbl_instansi");
@@ -168,23 +166,24 @@
                         $no = 1;
                         while($row = mysqli_fetch_array($query)){?>
 
-                        <!-- Row Start -->
-                        <div class="row">
-                            <!-- Secondary Nav START -->
-                            <div class="col s12">
-                                <nav class="secondary-nav">
-                                    <div class="nav-wrapper deep-purple darken-1">
-                                        <ul class="left">
-                                            <li class="waves-effect waves-light"><a href="?page=sett"><i class="material-icons md-24">work</i> Manajemen Instansi</a></li>
-                                        </ul>
-                                    </div>
-                                </nav>
-                            </div>
-                            <!-- Secondary Nav END -->
-                        </div>
-                        <!-- Row END -->
+<!-- Row Start -->
+<div class="row">
+    <!-- Secondary Nav START -->
+    <div class="col s12">
+        <nav class="secondary-nav">
+            <div class="nav-wrapper deep-purple darken-1">
+                <ul class="left">
+                    <li class="waves-effect waves-light"><a href="?page=sett"><i class="material-icons md-24">work</i>
+                            Manajemen Instansi</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- Secondary Nav END -->
+</div>
+<!-- Row END -->
 
-                        <?php
+<?php
                             if(isset($_SESSION['errEmpty'])){
                                 $errEmpty = $_SESSION['errEmpty'];
                                 echo '<div id="alert-message" class="row">
@@ -226,121 +225,116 @@
                             }
                         ?>
 
-                        <!-- Row form Start -->
-                        <div class="row jarak-form">
+<!-- Row form Start -->
+<div class="row jarak-form">
 
-                            <!-- Form START -->
-                            <form class="col s12" method="post" action="?page=sett" enctype="multipart/form-data">
+    <!-- Form START -->
+    <form class="col s12" method="post" action="?page=sett" enctype="multipart/form-data">
 
-                                <!-- Row in form START -->
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        <input type="hidden" value="<?php echo $id_instansi; ?>" name="id_instansi">
-                                        <i class="material-icons prefix md-prefix">school</i>
-                                        <input id="nama" type="text" class="validate" name="nama" value="<?php echo $row['nama']; ?>" required>
-                                            <?php
+        <!-- Row in form START -->
+        <div class="row">
+            <div class="input-field col s6">
+                <input type="hidden" value="<?php echo $id_instansi; ?>" name="id_instansi">
+                <i class="material-icons prefix md-prefix">school</i>
+                <input id="nama" type="text" class="validate" name="nama" value="<?php echo $row['nama']; ?>" required>
+                <?php
                                                 if(isset($_SESSION['namains'])){
                                                     $namains = $_SESSION['namains'];
                                                     echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$namains.'</div>';
                                                     unset($_SESSION['namains']);
                                                 }
                                             ?>
-                                        <label for="nama">Nama Instansi</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <i class="material-icons prefix md-prefix">work</i>
-                                        <input id="institusi" type="text" class="validate" name="institusi" value="<?php echo $row['institusi']; ?>" required>
-                                            <?php
+                <label for="nama">Nama Instansi</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix md-prefix">work</i>
+                <input id="institusi" type="text" class="validate" name="institusi"
+                    value="<?php echo $row['institusi']; ?>" required>
+                <?php
                                                 if(isset($_SESSION['institusi'])){
                                                     $institusi = $_SESSION['institusi'];
                                                     echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$institusi.'</div>';
                                                     unset($_SESSION['institusi']);
                                                 }
                                             ?>
-                                        <label for="institusi">Nama Yayasan</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <i class="material-icons prefix md-prefix">assistant_photo</i>
-                                        <input id="status" type="text" class="validate" name="status" value='<?php echo $row['status']; ?>' required>
-                                            <?php
-                                                if(isset($_SESSION['status'])){
-                                                    $status = $_SESSION['status'];
-                                                    echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$status.'</div>';
-                                                    unset($_SESSION['status']);
-                                                }
-                                            ?>
-                                        <label for="status">Status</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <i class="material-icons prefix md-prefix">account_box</i>
-                                        <input id="kepsek" type="text" class="validate" name="kepsek" value="<?php echo $row['kepsek']; ?>" required>
-                                            <?php
+                <label for="institusi">Nama Yayasan</label>
+            </div>
+            <!--  -->
+            <div class="input-field col s6">
+                <i class="material-icons prefix md-prefix">account_box</i>
+                <input id="kepsek" type="text" class="validate" name="kepsek" value="<?php echo $row['kepsek']; ?>"
+                    required>
+                <?php
                                                 if(isset($_SESSION['kepsek'])){
                                                     $kepsek = $_SESSION['kepsek'];
                                                     echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$kepsek.'</div>';
                                                     unset($_SESSION['kepsek']);
                                                 }
                                             ?>
-                                        <label for="kepsek">Nama Kepala Sekolah</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <i class="material-icons prefix md-prefix">place</i>
-                                        <input id="alamat" type="text" class="validate" name="alamat" value="<?php echo $row['alamat']; ?>" required>
-                                            <?php
+                <label for="kepsek">Nama</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix md-prefix">place</i>
+                <input id="alamat" type="text" class="validate" name="alamat" value="<?php echo $row['alamat']; ?>"
+                    required>
+                <?php
                                                 if(isset($_SESSION['alamat'])){
                                                     $alamat = $_SESSION['alamat'];
                                                     echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$alamat.'</div>';
                                                     unset($_SESSION['alamat']);
                                                 }
                                             ?>
-                                        <label for="alamat">Alamat</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <i class="material-icons prefix md-prefix">looks_one</i>
-                                        <input id="nip" type="text" class="validate" name="nip" value="<?php echo $row['nip']; ?>" required>
-                                            <?php
+                <label for="alamat">Alamat</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix md-prefix">looks_one</i>
+                <input id="nip" type="text" class="validate" name="nip" value="<?php echo $row['nip']; ?>" required>
+                <?php
                                                 if(isset($_SESSION['nipkepsek'])){
                                                     $nipkepsek = $_SESSION['nipkepsek'];
                                                     echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$nipkepsek.'</div>';
                                                     unset($_SESSION['nipkepsek']);
                                                 }
                                             ?>
-                                        <label for="nip">NIP Kepala Sekolah</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <i class="material-icons prefix md-prefix">language</i>
-                                        <input id="website" type="url" class="validate" name="website" value="<?php echo $row['website']; ?>" required>
-                                            <?php
+                <label for="nip">NIP</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix md-prefix">language</i>
+                <input id="website" type="url" class="validate" name="website" value="<?php echo $row['website']; ?>"
+                    required>
+                <?php
                                                 if(isset($_SESSION['website'])){
                                                     $website = $_SESSION['website'];
                                                     echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$website.'</div>';
                                                     unset($_SESSION['website']);
                                                 }
                                             ?>
-                                        <label for="website">Website</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <i class="material-icons prefix md-prefix">mail</i>
-                                        <input id="email" type="email" class="validate" name="email" value="<?php echo $row['email']; ?>" required>
-                                            <?php
+                <label for="website">Website</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix md-prefix">mail</i>
+                <input id="email" type="email" class="validate" name="email" value="<?php echo $row['email']; ?>"
+                    required>
+                <?php
                                                 if(isset($_SESSION['email'])){
                                                     $email = $_SESSION['email'];
                                                     echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$email.'</div>';
                                                     unset($_SESSION['email']);
                                                 }
                                             ?>
-                                        <label for="email">Email Instansi</label>
-                                    </div>
-                                    <div class="input-field col s6 tooltipped" data-position="top" data-tooltip="Jika tidak ada logo, biarkan kosong">
-                                        <div class="file-field input-field">
-                                            <div class="btn light-green darken-1">
-                                                <span>File</span>
-                                                <input type="file" id="logo" name="logo">
-                                            </div>
-                                            <div class="file-path-wrapper">
-                                                <input class="file-path validate" type="text" placeholder="Upload Logo instansi">
-                                            </div>
-                                                <?php
+                <label for="email">Email Instansi</label>
+            </div>
+            <div class="input-field col s6 tooltipped" data-position="top"
+                data-tooltip="Jika tidak ada logo, biarkan kosong">
+                <div class="file-field input-field">
+                    <div class="btn light-green darken-1">
+                        <span>File</span>
+                        <input type="file" id="logo" name="logo">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Upload Logo instansi">
+                    </div>
+                    <?php
                                                     if(isset($_SESSION['errSize'])){
                                                         $errSize = $_SESSION['errSize'];
                                                         echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$errSize.'</div>';
@@ -352,29 +346,32 @@
                                                         unset($_SESSION['errFormat']);
                                                     }
                                                 ?>
-                                            <small class="red-text">*Format file yang diperbolehkan hanya *.JPG, *.PNG dan ukuran maksimal file 2 MB. Disarankan gambar berbentuk kotak atau lingkaran!</small>
-                                        </div>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <img class="logo" src="upload/<?php echo $row['logo']; ?>"/>
-                                    </div>
-                                </div>
-                                <!-- Row in form END -->
+                    <small class="red-text">*Format file yang diperbolehkan hanya *.JPG, *.PNG dan ukuran maksimal file
+                        2 MB. Disarankan gambar berbentuk kotak atau lingkaran!</small>
+                </div>
+            </div>
+            <div class="input-field col s6">
+                <img class="logo" src="upload/<?php echo $row['logo']; ?>" />
+            </div>
+        </div>
+        <!-- Row in form END -->
 
-                                <div class="row">
-                                    <div class="col 6">
-                                        <button type="submit" name="submit" class="btn-large blue waves-effect waves-light">SIMPAN <i class="material-icons">done</i></button>
-                                    </div>
-                                    <div class="col 6">
-                                        <a href="./admin.php" class="btn-large deep-orange waves-effect waves-light">BATAL <i class="material-icons">clear</i></a>
-                                    </div>
-                                </div>
+        <div class="row">
+            <div class="col 6">
+                <button type="submit" name="submit" class="btn-large blue waves-effect waves-light">SIMPAN <i
+                        class="material-icons">done</i></button>
+            </div>
+            <div class="col 6">
+                <a href="./admin.php" class="btn-large deep-orange waves-effect waves-light">BATAL <i
+                        class="material-icons">clear</i></a>
+            </div>
+        </div>
 
-                            </form>
-                            <!-- Form END -->
+    </form>
+    <!-- Form END -->
 
-                        </div>
-                        <!-- Row form END -->
+</div>
+<!-- Row form END -->
 
 <?php
                         }
